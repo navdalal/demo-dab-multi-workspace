@@ -1,1 +1,53 @@
+name: deploy-common
 
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'bundles/common_jobs/**'
+      - 'shared/**'
+      - '.github/workflows/deploy-common.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: deploy common_jobs to ${{ matrix.target }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: uat
+            host_secret: DATABRICKS_HOST_UAT
+            client_id_secret: DATABRICKS_CLIENT_ID_UAT
+            client_secret_secret: DATABRICKS_CLIENT_SECRET_UAT
+          - target: us1
+            host_secret: DATABRICKS_HOST_US1
+            client_id_secret: DATABRICKS_CLIENT_ID_US1
+            client_secret_secret: DATABRICKS_CLIENT_SECRET_US1
+          - target: elt
+            host_secret: DATABRICKS_HOST_ELT
+            client_id_secret: DATABRICKS_CLIENT_ID_ELT
+            client_secret_secret: DATABRICKS_CLIENT_SECRET_ELT
+    env:
+      DATABRICKS_HOST: ${{ secrets[matrix.host_secret] }}
+      DATABRICKS_CLIENT_ID: ${{ secrets[matrix.client_id_secret] }}
+      DATABRICKS_CLIENT_SECRET: ${{ secrets[matrix.client_secret_secret] }}
+      DATABRICKS_BUNDLE_ENV: ${{ matrix.target }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Validate bundle
+        working-directory: bundles/common_jobs
+        run: databricks bundle validate -t ${{ matrix.target }}
+
+      - name: Deploy bundle
+        working-directory: bundles/common_jobs
+        run: databricks bundle deploy -t ${{ matrix.target }}

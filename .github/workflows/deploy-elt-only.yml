@@ -1,1 +1,36 @@
+name: deploy-elt-only
 
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'bundles/elt_only/**'
+      - 'shared/**'
+      - '.github/workflows/deploy-elt-only.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: deploy elt_only to ELT
+    runs-on: ubuntu-latest
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST_ELT }}
+      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID_ELT }}
+      DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET_ELT }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Validate bundle
+        working-directory: bundles/elt_only
+        run: databricks bundle validate -t elt
+
+      - name: Deploy bundle
+        working-directory: bundles/elt_only
+        run: databricks bundle deploy -t elt

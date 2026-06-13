@@ -1,1 +1,20 @@
-
+resources:
+  jobs:
+    common_demo_job:
+      name: common_demo_job
+      tags:
+        bundle: common_jobs
+        owner: fe-demo
+      tasks:
+        - task_key: greet
+          notebook_task:
+            notebook_path: ../src/notebooks/common_job.py
+            base_parameters:
+              workspace_label: ${bundle.target}
+              catalog: ${var.catalog}
+              schema: ${var.schema}
+              shared_path: ${workspace.file_path}/shared/python
+      email_notifications:
+        on_failure:
+          - ${var.notification_email}
+      max_concurrent_runs: 1

@@ -1,1 +1,31 @@
+bundle:
+  name: elt_only
 
+include:
+  - resources/*.yml
+
+sync:
+  paths:
+    - .
+    - ../../shared
+
+variables:
+  catalog:
+    default: main
+  schema:
+    default: dab_demo_elt
+  notification_email:
+    default: naveen.dalal@databricks.com
+
+targets:
+  elt:
+    mode: production
+    default: true
+    workspace:
+      host: https://dbc-776b219b-58bd.cloud.databricks.com
+      root_path: /Workspace/Shared/.bundle/elt_only/${bundle.target}
+    variables:
+      catalog: main
+      schema: dab_demo_elt
+    run_as:
+      user_name: naveen.dalal@databricks.com
