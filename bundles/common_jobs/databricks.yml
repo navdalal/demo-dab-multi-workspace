@@ -1,1 +1,57 @@
+bundle:
+  name: common_jobs
 
+include:
+  - resources/*.yml
+
+# Pull in shared/ from the repo root so it deploys alongside this bundle.
+# Without this, shared/python/common_utils.py would not exist in the workspace.
+sync:
+  paths:
+    - .
+    - ../../shared
+
+variables:
+  catalog:
+    description: Unity Catalog name.
+    default: dab_demo
+  schema:
+    description: Schema where demo objects land.
+    default: dab_demo
+  notification_email:
+    description: Email for job failure notifications.
+    default: naveen.dalal@databricks.com
+
+targets:
+  uat:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-51b48072-8f2d.cloud.databricks.com
+    variables:
+      catalog: dab_demo
+      schema: dab_demo_uat
+    run_as:
+      user_name: naveen.dalal@databricks.com
+
+  us1:
+    mode: production
+    workspace:
+      host: https://dbc-20e51d9a-9bed.cloud.databricks.com
+      root_path: /Workspace/Shared/.bundle/common_jobs/${bundle.target}
+    variables:
+      catalog: dab_demo
+      schema: dab_demo_us1
+    run_as:
+      user_name: naveen.dalal@databricks.com
+
+  elt:
+    mode: production
+    workspace:
+      host: https://dbc-776b219b-58bd.cloud.databricks.com
+      root_path: /Workspace/Shared/.bundle/common_jobs/${bundle.target}
+    variables:
+      catalog: dab_demo
+      schema: dab_demo_elt
+    run_as:
+      user_name: naveen.dalal@databricks.com

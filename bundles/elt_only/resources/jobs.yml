@@ -1,1 +1,21 @@
-
+resources:
+  jobs:
+    elt_specialized_job:
+      name: elt_specialized_job
+      tags:
+        bundle: elt_only
+        owner: fe-demo
+      tasks:
+        - task_key: elt_specialized_logic
+          notebook_task:
+            notebook_path: ../src/notebooks/elt_job.py
+            base_parameters:
+              workspace_label: ${bundle.target}
+              catalog: ${var.catalog}
+              schema: ${var.schema}
+              shared_path: ${workspace.file_path}/shared/python
+              pipeline_stage: elt
+      email_notifications:
+        on_failure:
+          - ${var.notification_email}
+      max_concurrent_runs: 1

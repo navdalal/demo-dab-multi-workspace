@@ -1,1 +1,21 @@
-
+resources:
+  jobs:
+    us_regional_job:
+      name: us_regional_job
+      tags:
+        bundle: us_only
+        owner: fe-demo
+      tasks:
+        - task_key: us_regional_logic
+          notebook_task:
+            notebook_path: ../src/notebooks/us_job.py
+            base_parameters:
+              workspace_label: ${bundle.target}
+              catalog: ${var.catalog}
+              schema: ${var.schema}
+              shared_path: ${workspace.file_path}/shared/python
+              region: us-east-1
+      email_notifications:
+        on_failure:
+          - ${var.notification_email}
+      max_concurrent_runs: 1

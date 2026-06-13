@@ -1,1 +1,32 @@
+bundle:
+  name: us_only
 
+include:
+  - resources/*.yml
+
+sync:
+  paths:
+    - .
+    - ../../shared
+
+variables:
+  catalog:
+    default: dab_demo
+  schema:
+    default: dab_demo_us1
+  notification_email:
+    default: naveen.dalal@databricks.com
+
+# Only one target — us_only is, by design, deployed nowhere else.
+targets:
+  us1:
+    mode: production
+    default: true
+    workspace:
+      host: https://dbc-20e51d9a-9bed.cloud.databricks.com
+      root_path: /Workspace/Shared/.bundle/us_only/${bundle.target}
+    variables:
+      catalog: dab_demo
+      schema: dab_demo_us1
+    run_as:
+      user_name: naveen.dalal@databricks.com
