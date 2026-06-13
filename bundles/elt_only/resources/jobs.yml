@@ -5,6 +5,10 @@ resources:
       tags:
         bundle: elt_only
         owner: fe-demo
+      schedule:
+        quartz_cron_expression: "0 0 6 * * ?"
+        timezone_id: "UTC"
+        pause_status: PAUSED
       tasks:
         - task_key: elt_specialized_logic
           notebook_task:
