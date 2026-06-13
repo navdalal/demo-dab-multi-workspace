@@ -31,6 +31,12 @@ from common_utils import greet, fqn, SHARED_VERSION
 print(greet(workspace_label))
 print(f"region={region}, shared_utils v{SHARED_VERSION}")
 
+
+# US-specific: dollar amounts in cents for IRS reporting
+sample_amounts_usd = [19.99, 42.50, 9.95]
+sample_amounts_cents = [int(round(x * 100)) for x in sample_amounts_usd]
+print(f"US tax cents: {sample_amounts_cents}")
+
 # COMMAND ----------
 
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog}.{schema}")
