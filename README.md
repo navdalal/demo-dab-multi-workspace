@@ -68,7 +68,20 @@ as a job parameter and `sys.path.insert(0, shared_path)` to import.
 
 ## 4. One-time setup
 
-### 4a. Create service principals (one per workspace)
+### 4a. Create the `dab_demo` catalog in each workspace
+
+The bundles default to the catalog `dab_demo`. Open the **SQL editor** in each of UAT, US1, ELT and run:
+
+```sql
+CREATE CATALOG IF NOT EXISTS dab_demo
+  COMMENT 'Catalog for the multi-workspace DAB demo';
+GRANT USE CATALOG, USE SCHEMA, CREATE SCHEMA, CREATE TABLE, MODIFY
+  ON CATALOG dab_demo TO `account users`;
+```
+
+Schemas under it (`dab_demo_uat`, `dab_demo_us1`, `dab_demo_elt`) are created by the notebooks at run time. If you'd rather reuse an existing catalog, override the `catalog` variable per target in each `bundles/*/databricks.yml`.
+
+### 4b. Create service principals (one per workspace)
 
 For each workspace, create a service principal with `CAN_MANAGE` on the
 bundle root path (or workspace admin for the demo) and generate an
@@ -83,7 +96,7 @@ In each workspace UI:
 
 > Production tip: scope the SP to the specific bundle root paths rather than admin. For the demo, admin keeps the click-path short.
 
-### 4b. Add GitHub repo secrets
+### 4c. Add GitHub repo secrets
 
 Go to `github.com/navdalal/demo-dab-multi-workspace` → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**. Add nine secrets:
 
@@ -99,13 +112,13 @@ Go to `github.com/navdalal/demo-dab-multi-workspace` → **Settings** → **Secr
 | `DATABRICKS_CLIENT_ID_ELT` | client id from ELT SP |
 | `DATABRICKS_CLIENT_SECRET_ELT` | client secret from ELT SP |
 
-### 4c. Link GitHub to Databricks (UAT only — the dev workspace)
+### 4d. Link GitHub to Databricks (UAT only — the dev workspace)
 
 Generate a GitHub PAT (`Settings → Developer settings → Personal access tokens → Tokens (classic)` with `repo` scope), then in the **UAT** workspace UI:
 1. Top-right avatar → **Settings** → **Linked accounts** (or **User Settings** → **Git Integration**).
 2. **Git provider** = GitHub. Paste username + PAT. Save.
 
-### 4d. Create the Git folder in UAT
+### 4e. Create the Git folder in UAT
 
 In UAT workspace:
 1. Left nav → **Workspace** → your home folder.

@@ -8,7 +8,7 @@
 # COMMAND ----------
 
 dbutils.widgets.text("workspace_label", "us1")
-dbutils.widgets.text("catalog", "main")
+dbutils.widgets.text("catalog", "dab_demo")
 dbutils.widgets.text("schema", "dab_demo_us1")
 dbutils.widgets.text("shared_path", "")
 dbutils.widgets.text("region", "us-east-1")

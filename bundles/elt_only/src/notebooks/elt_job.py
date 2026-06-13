@@ -8,7 +8,7 @@
 # COMMAND ----------
 
 dbutils.widgets.text("workspace_label", "elt")
-dbutils.widgets.text("catalog", "main")
+dbutils.widgets.text("catalog", "dab_demo")
 dbutils.widgets.text("schema", "dab_demo_elt")
 dbutils.widgets.text("shared_path", "")
 dbutils.widgets.text("pipeline_stage", "elt")

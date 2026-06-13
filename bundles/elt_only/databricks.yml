@@ -11,7 +11,7 @@ sync:
 
 variables:
   catalog:
-    default: main
+    default: dab_demo
   schema:
     default: dab_demo_elt
   notification_email:
@@ -25,7 +25,7 @@ targets:
       host: https://dbc-776b219b-58bd.cloud.databricks.com
       root_path: /Workspace/Shared/.bundle/elt_only/${bundle.target}
     variables:
-      catalog: main
+      catalog: dab_demo
       schema: dab_demo_elt
     run_as:
       user_name: naveen.dalal@databricks.com
