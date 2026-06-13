@@ -4,6 +4,8 @@ A demo that proves you do **not** need to copy code, notebooks, or job
 definitions across Databricks workspaces. One commit in GitHub fans out to
 three workspaces via Databricks Asset Bundles + GitHub Actions.
 
+> **Running the demo live?** Open [DEMO_SCENARIOS.md](DEMO_SCENARIOS.md) — four copy-paste scenarios with exact validation steps.
+
 ---
 
 ## 1. What this demo proves
