@@ -28,7 +28,7 @@ from common_utils import greet, fqn, SHARED_VERSION, deploy_fingerprint
 
 print(greet(workspace_label))
 print(f"shared_utils version = {SHARED_VERSION}")
-print(deploy_fingerprint(workspace_label, "common_jobs"))
+print(deploy_fingerprint(workspace_label, "common_jobs1"))
 
 # COMMAND ----------
 
