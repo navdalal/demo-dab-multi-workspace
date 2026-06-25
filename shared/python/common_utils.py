@@ -20,3 +20,9 @@ def greet(workspace_label: str) -> str:
 
 def fqn(catalog: str, schema: str, table: str) -> str:
     return f"{catalog}.{schema}.{table}"
+
+def deploy_fingerprint(workspace_label: str, bundle: str) -> str:
+    """Compact deploy fingerprint — drop in any notebook to prove
+    'which version ran where, when'. Useful for incident triage."""
+    ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return f"fp::ws={workspace_label}::bundle={bundle}::v{SHARED_VERSION}::t={ts}"
