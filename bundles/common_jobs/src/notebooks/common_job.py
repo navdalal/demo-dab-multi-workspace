@@ -24,10 +24,11 @@ import sys
 if shared_path and shared_path not in sys.path:
     sys.path.insert(0, shared_path)
 
-from common_utils import greet, fqn, SHARED_VERSION
+from common_utils import greet, fqn, SHARED_VERSION, deploy_fingerprint
 
 print(greet(workspace_label))
 print(f"shared_utils version = {SHARED_VERSION}")
+print(deploy_fingerprint(workspace_label, "common_jobs"))
 
 # COMMAND ----------
 
