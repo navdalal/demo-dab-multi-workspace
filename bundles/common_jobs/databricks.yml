@@ -27,7 +27,7 @@ targets:
     mode: development
     default: true
     workspace:
-      host: https://dbc-51b48072-8f2d.cloud.databricks.com
+      host: https://dbc-95795636-348f.cloud.databricks.com
     variables:
       catalog: dab_demo
       schema: dab_demo_uat
@@ -37,7 +37,7 @@ targets:
   us1:
     mode: production
     workspace:
-      host: https://dbc-20e51d9a-9bed.cloud.databricks.com
+      host: https://dbc-d471ac68-b7bb.cloud.databricks.com
       root_path: /Workspace/Shared/.bundle/common_jobs/${bundle.target}
     variables:
       catalog: dab_demo
@@ -48,7 +48,7 @@ targets:
   elt:
     mode: production
     workspace:
-      host: https://dbc-776b219b-58bd.cloud.databricks.com
+      host: https://dbc-904d8ddc-f78d.cloud.databricks.com
       root_path: /Workspace/Shared/.bundle/common_jobs/${bundle.target}
     variables:
       catalog: dab_demo
