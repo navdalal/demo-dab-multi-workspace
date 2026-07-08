@@ -7,7 +7,7 @@ so notebooks add the workspace path to sys.path and import from here.
 from datetime import datetime, timezone
 
 
-SHARED_VERSION = "1.0.3"
+SHARED_VERSION = "1.1.4"
 
 
 def greet(workspace_label: str) -> str:
