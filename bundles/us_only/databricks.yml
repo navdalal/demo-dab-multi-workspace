@@ -23,7 +23,7 @@ targets:
     mode: production
     default: true
     workspace:
-      host: https://dbc-d471ac68-b7bb.cloud.databricks.com
+      host: https://dbc-e9012c27-cabb.cloud.databricks.com
       root_path: /Workspace/Shared/.bundle/us_only/${bundle.target}
     variables:
       catalog: dab_demo
