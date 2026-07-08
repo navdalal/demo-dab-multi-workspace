@@ -22,7 +22,7 @@ targets:
     mode: production
     default: true
     workspace:
-      host: https://dbc-5f0ce80f-4084.cloud.databricks.com
+      host: https://dbc-5f0ce80f-4084.cloud.databricks.com/
       root_path: /Workspace/Shared/.bundle/elt_only/${bundle.target}
     variables:
       catalog: dab_demo
