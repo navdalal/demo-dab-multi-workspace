@@ -29,7 +29,7 @@ if shared_path and shared_path not in sys.path:
 from common_utils import greet, fqn, SHARED_VERSION
 
 print(greet(workspace_label))
-print(f"region={region}, shared_utils v{SHARED_VERSION}")
+print(f"region={region}, shared_utils v2 v{SHARED_VERSION}")
 
 
 # US-specific: dollar amounts in cents for IRS reporting
