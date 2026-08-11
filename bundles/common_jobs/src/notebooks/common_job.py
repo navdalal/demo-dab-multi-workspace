@@ -27,7 +27,7 @@ if shared_path and shared_path not in sys.path:
 from common_utils import greet, fqn, SHARED_VERSION, deploy_fingerprint
 
 print(greet(workspace_label))
-print(f"shared_utils version = {SHARED_VERSION}")
+print(f"shared_utils version is at = {SHARED_VERSION}")
 print(deploy_fingerprint(workspace_label, "common_jobs1"))
 
 # COMMAND ----------
